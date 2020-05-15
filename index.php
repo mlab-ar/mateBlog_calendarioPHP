@@ -155,6 +155,30 @@ $events = $result->fetchAll();
             </div>
         </div>
         <!-- /Modal Editar Titulo o Eliminar Evento -->
+        <!-- Modal Cambios -->
+        <div class="modal fade" id="alert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form class="form-horizontal" method="POST" action="core/editTitleDeleteEvent.php">
+
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">¡Oye!</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-sm-10" id="result">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /Modal Cambios -->
     </div>
     <!-- /container -->
     <!-- Incluimos Bootstrap JS-->
@@ -233,7 +257,7 @@ $events = $result->fetchAll();
                         },
                     <?php } ?>
                 ]
-            });//Fin Full Calendar
+            }); //Fin Full Calendar
             /**Función Encargada de Editar el Evento con los Eventos Anteriores */
             function update(event) {
                 /**Capturamos la Fecha y Hora de Incio */
@@ -260,13 +284,15 @@ $events = $result->fetchAll();
                     },
                     success: function(rep) {
                         if (rep == 'ohSi') {
-                            alert('Se Edito Correctamente el Evento');
+                            $( "#result" ).html('Se Editó Correctamente el Evento.');
+                            $('#alert').modal('show');
                         } else {
-                            alert('No se pudo Editar. Intentemos de Nuevo.');
+                            $( "#result" ).html('No se pudo Editar. Intentemos de Nuevo.');
+                            $('#alert').modal('show');
                         }
                     }
                 });
-            }//Fin Update
+            } //Fin Update
         });
     </script>
 </body>
